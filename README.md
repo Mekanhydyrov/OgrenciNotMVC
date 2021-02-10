@@ -1,0 +1,2 @@
+# OgrenciNotMVC
+ Asp.Net Mvc
