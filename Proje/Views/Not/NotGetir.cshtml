@@ -1,0 +1,51 @@
+﻿@model OgrenciNotMVC.Models.EntityFramework.TblNot
+@{
+    ViewBag.Title = "NotGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("NotGetir", "Not", FormMethod.Post))
+{
+    <div>
+        <label><b>Öğrenci id</b></label>
+        @Html.TextBoxFor(m => m.Ogrid, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Viza</b></label>
+        @Html.TextBoxFor(m => m.Viza, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Final</b></label>
+        @Html.TextBoxFor(m => m.Final, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Büt</b></label>
+        @Html.TextBoxFor(m => m.But, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Proje</b></label>
+        @Html.TextBoxFor(m => m.Proje, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Ortalama</b></label>
+        @Html.TextBoxFor(m => m.Ortalama, new {@Value= @ViewBag.ort, @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Durum</b></label>
+        @Html.TextBoxFor(m => m.Durum, new { @class = "form-control" })
+    </div>
+    <br />
+    @Html.HiddenFor(m=>m.Notid)
+<div>
+    <button type="submit" name="islem" value="Hesapla" class="btn btn-default">Hesapla</button>
+    <button type="submit" name="islem" value="Guncelle" class="btn btn-primary" style="margin-left:20px">Güncelle</button>
+</div>
+    
+}
+

@@ -1,0 +1,39 @@
+﻿@model OgrenciNotMVC.Models.EntityFramework.TblOgrenci
+@{
+    ViewBag.Title = "OgrGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Guncelle", "Ogrenci", FormMethod.Post))
+{
+    <div>
+        <label><b>Öğrenci Ad</b></label>
+        @Html.TextBoxFor(m => m.OgrAd, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Öğrenci Soyad</b></label>
+        @Html.TextBoxFor(m => m.OgrSoyad, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Öğrenci Foto</b></label>
+        @Html.TextBoxFor(m => m.OgrFoto, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Öğrenci Kulüp</b></label>
+       @Html.DropDownListFor(m=>m.TblKulup.Kulupid, (List<SelectListItem>)ViewBag.dgr, new { @class="form-control"})
+    </div>
+    <br />
+    <div>
+        <label><b>Öğrenci Cinsiyet</b></label>
+        @Html.TextBoxFor(m => m.OgrCinsiyet, new { @class = "form-control" })
+    </div>
+    <br />
+    @Html.HiddenFor(m=>m.Ogrid)
+    <div>
+        <button class="btn btn-primary">Öğrenci Güncelle</button>
+    </div>
+}
+

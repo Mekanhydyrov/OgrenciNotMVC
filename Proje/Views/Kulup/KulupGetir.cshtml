@@ -1,0 +1,24 @@
+﻿@model OgrenciNotMVC.Models.EntityFramework.TblKulup
+@{
+    ViewBag.Title = "KulupGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Guncelle", "Kulup", FormMethod.Post))
+{
+    <div>
+        <label><b>Kulüp Ad</b></label>
+        @Html.TextBoxFor(m => m.KulupAd, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <label><b>Kulüp Kontenjan</b></label>
+        @Html.TextBoxFor(m => m.KulupKontenjan, new { @class = "form-control" })
+    </div>
+    <br />
+    @Html.HiddenFor(m => m.Kulupid)
+    <div>
+        <button class="btn btn-primary">Kulüp Güncelle</button>
+    </div>
+}
+

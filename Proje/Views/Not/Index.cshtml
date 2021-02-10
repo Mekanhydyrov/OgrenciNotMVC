@@ -1,0 +1,40 @@
+﻿@using OgrenciNotMVC.Models.EntityFramework
+@model List<TblNot>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>NOT İD</th>
+        <th>ÖĞRENCİ</th>
+        <th>DERS</th>
+        <th>VİZA</th>
+        <th>FİNAL</th>
+        <th>BÜT</th>
+        <th>PROJE</th>
+        <th>ORTALAMA</th>
+        <th>DURUM</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    <tbody>
+        @foreach (var not in Model)
+        {
+        <tr>
+            <td>@not.Notid</td>
+            <td>@not.Ogrid</td>
+            <td>@not.Dersid</td>
+            <td>@not.Viza</td>
+            <td>@not.Final</td>
+            <td>@not.But</td>
+            <td>@not.Proje</td>
+            <td>@not.Ortalama</td>
+            <td>@not.Durum</td>
+            <td><a href="/Not/NotGetir/@not.Notid" class="btn btn-warning">Güncelle</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a href="/Not/YeniNot"  class="btn btn-primary">Yeni Not</a>
+

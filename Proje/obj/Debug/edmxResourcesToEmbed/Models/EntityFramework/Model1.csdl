@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbMvcOkulModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TblDers">
+    <Key>
+      <PropertyRef Name="Dersid" />
+    </Key>
+    <Property Name="Dersid" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DersAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TblNot" Relationship="Self.FK_TblNot_TblDers" FromRole="TblDers" ToRole="TblNot" />
+  </EntityType>
+  <EntityType Name="TblKulup">
+    <Key>
+      <PropertyRef Name="Kulupid" />
+    </Key>
+    <Property Name="Kulupid" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KulupAd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="KulupKontenjan" Type="Int16" />
+    <NavigationProperty Name="TblOgrenci" Relationship="Self.FK_TblOgrenci_TblKulup" FromRole="TblKulup" ToRole="TblOgrenci" />
+  </EntityType>
+  <EntityType Name="TblNot">
+    <Key>
+      <PropertyRef Name="Notid" />
+    </Key>
+    <Property Name="Notid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dersid" Type="Byte" />
+    <Property Name="Ogrid" Type="Int32" />
+    <Property Name="Viza" Type="Byte" />
+    <Property Name="Final" Type="Byte" />
+    <Property Name="But" Type="Byte" />
+    <Property Name="Proje" Type="Byte" />
+    <Property Name="Ortalama" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Durum" Type="Boolean" />
+    <NavigationProperty Name="TblDers" Relationship="Self.FK_TblNot_TblDers" FromRole="TblNot" ToRole="TblDers" />
+    <NavigationProperty Name="TblOgrenci" Relationship="Self.FK_TblNot_TblOgrenci" FromRole="TblNot" ToRole="TblOgrenci" />
+  </EntityType>
+  <EntityType Name="TblOgrenci">
+    <Key>
+      <PropertyRef Name="Ogrid" />
+    </Key>
+    <Property Name="Ogrid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OgrAd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="OgrSoyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="OgrFoto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="OgrCinsiyet" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OgrKulup" Type="Byte" />
+    <NavigationProperty Name="TblKulup" Relationship="Self.FK_TblOgrenci_TblKulup" FromRole="TblOgrenci" ToRole="TblKulup" />
+    <NavigationProperty Name="TblNot" Relationship="Self.FK_TblNot_TblOgrenci" FromRole="TblOgrenci" ToRole="TblNot" />
+  </EntityType>
+  <Association Name="FK_TblNot_TblDers">
+    <End Role="TblDers" Type="Self.TblDers" Multiplicity="0..1" />
+    <End Role="TblNot" Type="Self.TblNot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblDers">
+        <PropertyRef Name="Dersid" />
+      </Principal>
+      <Dependent Role="TblNot">
+        <PropertyRef Name="Dersid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblOgrenci_TblKulup">
+    <End Role="TblKulup" Type="Self.TblKulup" Multiplicity="0..1" />
+    <End Role="TblOgrenci" Type="Self.TblOgrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblKulup">
+        <PropertyRef Name="Kulupid" />
+      </Principal>
+      <Dependent Role="TblOgrenci">
+        <PropertyRef Name="OgrKulup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TblNot_TblOgrenci">
+    <End Role="TblOgrenci" Type="Self.TblOgrenci" Multiplicity="0..1" />
+    <End Role="TblNot" Type="Self.TblNot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TblOgrenci">
+        <PropertyRef Name="Ogrid" />
+      </Principal>
+      <Dependent Role="TblNot">
+        <PropertyRef Name="Ogrid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DbMvcOkulEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TblDers" EntityType="Self.TblDers" />
+    <EntitySet Name="TblKulup" EntityType="Self.TblKulup" />
+    <EntitySet Name="TblNot" EntityType="Self.TblNot" />
+    <EntitySet Name="TblOgrenci" EntityType="Self.TblOgrenci" />
+    <AssociationSet Name="FK_TblNot_TblDers" Association="Self.FK_TblNot_TblDers">
+      <End Role="TblDers" EntitySet="TblDers" />
+      <End Role="TblNot" EntitySet="TblNot" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblOgrenci_TblKulup" Association="Self.FK_TblOgrenci_TblKulup">
+      <End Role="TblKulup" EntitySet="TblKulup" />
+      <End Role="TblOgrenci" EntitySet="TblOgrenci" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TblNot_TblOgrenci" Association="Self.FK_TblNot_TblOgrenci">
+      <End Role="TblOgrenci" EntitySet="TblOgrenci" />
+      <End Role="TblNot" EntitySet="TblNot" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
